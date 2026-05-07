@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+
+<title>Forehead Scanner </title>
+
+<style>
+    body {
+        font-family: Arial;
+        text-align: center;
+        margin-top: 80px;
+        background: #111;
+        color: white;
+    }
+
+    input, button {
+        padding: 10px;
+        font-size: 16px;
+        margin: 10px;
+    }
+
+    button {
+        cursor: pointer;
+    }
+
+    #bar {
+        margin-top: 20px;
+        font-family: monospace;
+    }
+</style>
+</head>
+
+<body>
+
+<h1>🧠📏 Forehead Database</h1>
+
+<input id="name" placeholder="Enter your name">
+<br>
+<button onclick="scan()">Start Scan</button>
+
+<p id="status"></p>
+<p id="bar"></p>
+<p id="result"></p>
+
+<script>
+async function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+let count = 0;
+
+async function scan() {
+    let name = document.getElementById("name").value;
+    let status = document.getElementById("status");
+    let bar = document.getElementById("bar");
+    let result = document.getElementById("result");
+
+    status.innerText = "Searching through database...";
+    result.innerText = "";
+
+    let stages = [
+        "█--------- 10%",
+        "██-------- 20%",
+        "███------- 30%",
+        "████------ 40%",
+        "█████----- 50%",
+        "██████---- 60%",
+        "███████--- 70%",
+        "████████-- 80%",
+        "█████████- 90%",
+        "██████████ 100%"
+    ];
+
+    for (let i = 0; i < stages.length; i++) {
+        bar.innerText = stages[i];
+        await new Promise(r => setTimeout(r, 500));
+    }
+
+    status.innerText = "Scan complete";
+
+    let lower = name.toLowerCase();
+
+    if (lower === "atif") {
+        if (count === 0) {
+            result.innerText = "You could fit Mount Everest on that forehead 🫪";
+        } 
+        else if (count === 1) {
+            result.innerText = "Only ONE forehead approved per entity.";
+        } 
+        else if (count === 2) {
+            result.innerText = "one hundred point two, million and seventy thousand, four hundred thousand and sixty, thirty six hundred, and nineteen, point fifty";
+        } 
+        else if (count === 3) {
+            result.innerText = "Stop. Just stop.";
+        } 
+        else {
+            result.innerText = "SYSTEM OVERLOAD: forehead data corrupted.";
+        }
+
+    } else {
+        count++;
+        result.innerText = "That is not your name. ACCESS DENIED.";
+    }
+}
+</script>
+
+</body>
+</html>
